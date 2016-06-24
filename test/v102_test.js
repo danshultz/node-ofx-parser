@@ -20,41 +20,6 @@ describe('parsing 1.0.2 spec', function () {
     this.result = parser.parse();
   });
 
-  it('parses all accounts', function () {
-    expect(this.result.accounts.length).to.equal(2);
-  });
-
-  it('parses the account properly', function () {
-    let account = this.result.accounts[0].account;
-
-    expect(account).to.deep.include({
-      bankId: '000000123',
-      id: '123456',
-      type: 'CHECKING',
-      available_balance: null,
-      currency: 'USD'
-    });
-
-    expect(account.balance).to.deep.equal({
-      amount: 215656, // in pennies
-      postedAt: '2005-08-31 16:50:56'
-    })
-  });
-
-  it('parses transactions properly', function () {
-    let transactions = this.result.accounts[0].transactions;
-
-    expect(transactions.length).to.equal(1);
-    expect(transactions[0]).to.deep.include({
-      amount: -8032,
-      fitId: '219378',
-      postedAt: '2005-08-24 08:00:00',
-      checkNumber: '1044',
-      name: 'FrogKick Scuba Gear',
-      type: 'PAYMENT'
-    });
-  });
-
   it('parses headers properly', function () {
     let headers = this.result.headers;
 
@@ -71,5 +36,46 @@ describe('parsing 1.0.2 spec', function () {
     });
   });
 
+  it('parses all accounts', function () {
+    expect(this.result.accounts.length).to.equal(2);
+  });
+
+  describe('parsing the checking account', function () {
+    beforeEach(function () {
+      this.checkingAccount = this.result.accounts[0];
+    });
+
+    it('parses the account properly', function () {
+      let account = this.checkingAccount;
+
+      expect(account).to.deep.include({
+        bankId: '000000123',
+        id: '123456',
+        type: 'CHECKING',
+        available_balance: null,
+        currency: 'USD'
+      });
+
+      expect(account.balance).to.deep.equal({
+        amount: 215656, // in pennies
+        postedAt: '2005-08-31 16:50:56'
+      })
+    });
+
+    it('parses transactions properly', function () {
+      let transactions = this.checkingAccount.transactions;
+
+      expect(transactions.length).to.equal(1);
+      expect(transactions[0]).to.deep.include({
+        amount: -8032,
+        fitId: '219378',
+        postedAt: '2005-08-24 08:00:00',
+        checkNumber: '1044',
+        name: 'FrogKick Scuba Gear',
+        type: 'PAYMENT'
+      });
+    });
+
+  });
 });
 
