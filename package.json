@@ -6,8 +6,12 @@
   "scripts": {
     "test": "./node_modules/.bin/mocha --reporter spec --recursive"
   },
-  "author": "",
+  "author": "Dan Shultz",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:danshultz/node-ofx-parser.git"
+  },
   "dependencies": {
     "cheerio": "^0.20.0"
   },
