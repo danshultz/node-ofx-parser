@@ -74,5 +74,48 @@ describe('parsing 2.1.1 spec', function () {
 
   });
 
-});
+  describe('parsing the credit account', function () {
+    beforeEach(function () {
+      this.creditAccount = this.result.accounts[1];
+    });
 
+    it('parses the account properly', function () {
+      let account = this.creditAccount;
+
+      expect(account).to.deep.include({
+        bankId: '',
+        id: '123412341234',
+        type: '',
+        available_balance: null,
+        currency: 'USD'
+      });
+
+      expect(account.balance).to.deep.equal({
+        amount: -56200, // in pennies
+        postedAt: '2005-08-31 16:51:53'
+      })
+    });
+
+    it('parses transactions properly', function () {
+      let transactions = this.creditAccount.transactions;
+
+      expect(transactions.length).to.equal(2);
+      expect(transactions[0]).to.deep.include({
+        amount: -2300,
+        fitId: '219867',
+        name: 'Interest Charge',
+        postedAt: '2005-08-11 08:00:00',
+        type: 'INT'
+      });
+      expect(transactions[1]).to.deep.include({
+        amount: 35000,
+        fitId: '219868',
+        name: 'Payment - Thank You',
+        postedAt: '2005-08-11 08:00:00',
+        type: 'CREDIT'
+      });
+    });
+
+  });
+
+});

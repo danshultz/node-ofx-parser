@@ -77,5 +77,34 @@ describe('parsing 1.0.2 spec', function () {
     });
 
   });
+
+  describe('parsing the savings account', function () {
+    beforeEach(function () {
+      this.savingsAccount = this.result.accounts[1];
+    });
+
+    it('parses the account properly', function () {
+      let account = this.savingsAccount;
+
+      expect(account).to.deep.include({
+        bankId: '000000123',
+        id: '654321',
+        type: 'SAVINGS',
+        available_balance: null,
+        currency: 'USD'
+      });
+
+      expect(account.balance).to.deep.equal({
+        amount: 345200, // in pennies
+        postedAt: '2005-08-31 16:50:56'
+      })
+    });
+
+    it('parses transactions properly', function () {
+      let transactions = this.savingsAccount.transactions;
+      expect(transactions.length).to.equal(0);
+    });
+
+  });
 });
 
