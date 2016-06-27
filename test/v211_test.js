@@ -32,6 +32,16 @@ describe('parsing 2.1.1 spec', function () {
     });
   });
 
+  it('parses the sign on info properly', function () {
+    let signOnInfo = this.result.signOn;
+
+    expect(signOnInfo).to.deep.equal({
+      language: 'ENG',
+      fiId: '',
+      fiName: 'FOO BANK'
+    });
+  });
+
   it('parses all accounts', function () {
     expect(this.result.accounts.length).to.equal(2);
   });
