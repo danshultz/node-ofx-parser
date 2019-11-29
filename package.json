@@ -13,10 +13,10 @@
     "url": "git@github.com:danshultz/node-ofx-parser.git"
   },
   "dependencies": {
-    "cheerio": "^0.20.0"
+    "cheerio": "^1.0.0"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
-    "mocha": "^2.5.3"
+    "chai": "^4.2.0",
+    "mocha": "^6.2.2"
   }
 }

@@ -2,11 +2,9 @@
 
 OFX File Parser
 
-**WARNING** - This is still very much in progress.
+Works quite well for parsing OFX files.
 
-Once this is stable, I'll update docs and publish as all current OFX parsers for Node are severely lacking.
-
-Requires Node 6.x for harmony support of destructuruing. Will most likely backport compatibility once I've happy with this library.
+Does not support investment ofx files currently.
 
 ### Supports Versions
 
